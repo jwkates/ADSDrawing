@@ -1,18 +1,8 @@
-import java.awt.Color;
-import java.awt.Graphics;
-import java.awt.Graphics2D;
-import java.awt.Canvas;
-import java.awt.event.ActionEvent;
-import java.awt.event.KeyListener;
+import javax.swing.*;
+import java.awt.*;
 import java.awt.event.KeyEvent;
-import java.awt.event.ActionListener;
+import java.awt.event.KeyListener;
 import java.awt.image.BufferedImage;
-import java.util.ArrayList;
-import java.awt.Point;
-import javax.swing.JFrame;
-import javax.swing.JPanel;
-import java.awt.Component;
-import java.awt.Font;
 
 public class Tablet extends JPanel implements KeyListener, Runnable {
 
@@ -58,10 +48,10 @@ public class Tablet extends JPanel implements KeyListener, Runnable {
     @Override
     public void paint(Graphics window) {
 
-        /* Make a canvas from the BufferedImage to allow persistence */
+        // Make a canvas from the BufferedImage to allow persistence 
         Graphics2D canvas = buffer.createGraphics();
 
-        /* If the space is pressed, center the brush and clear the screen */
+        // If the space is pressed, center the brush and clear the screen 
         if (keys[SPACE]) { //space
             x = WIDTH / 2;
             y = HEIGHT / 2;
@@ -70,7 +60,7 @@ public class Tablet extends JPanel implements KeyListener, Runnable {
             canvas.fillRect(0, 0, WIDTH, HEIGHT);
         }
 
-        /* Move brush according to key press */
+        // Move brush according to key press 
         if (keys[UP]) {
             y -= 1;
         }
@@ -84,18 +74,18 @@ public class Tablet extends JPanel implements KeyListener, Runnable {
             x += 1;
         }
 
-        /* Draw a 2x2 square at the location of the paintbrush to paint the path */
+        // Draw a 2x2 square at the location of the paintbrush to paint the path 
         canvas.setColor(Color.WHITE);
         canvas.fillRect(x, y, 2, 2);
 
-        /* Draw the instructions last to prevent flickering on clear. */
+        // Draw the instructions last to prevent flickering on clear. 
         canvas.setColor(Color.WHITE);
         canvas.setFont(new Font("TAHOMA", Font.BOLD, 18));
         canvas.drawString("A+ Draw a Shape", 20, 20);
         canvas.drawString("Use the arrow keys to draw.", 20, 40);
         canvas.drawString("Use the space bar to clear the screen.", 20, 60);
 
-        /* Finally, draw the buffered canvas onto the screen. */
+        // Finally, draw the buffered canvas onto the screen. 
         window.drawImage(buffer, 0, 0, null);
     }
 
